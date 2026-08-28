@@ -7,6 +7,12 @@
         "fastmcp",
         "run",
         "tools/jakarta-discovery/jakarta_discovery_server.py"
+      ],
+      "alwaysAllow": [
+        "scan_javax_usage",
+        "descriptor_audit",
+        "scan_config_literals",
+        "parse_dependency_tree"
       ]
     },
     "jakarta-impact": {
@@ -16,6 +22,10 @@
         "fastmcp",
         "run",
         "tools/run_jakarta_impact_server.py"
+      ],
+      "alwaysAllow": [
+        "analyze_impact",
+        "find_judgment_call_candidates"
       ]
     }
   }
