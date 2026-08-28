@@ -15,9 +15,9 @@ import dataclasses
 import json
 from pathlib import Path
 
-from .discovery_diff import build_descriptor_coverage, build_source_coverage
-from .judgment_scan import scan_judgment_calls
-from .transformer_runner import TransformerRunner, find_built_war
+from discovery_diff import build_descriptor_coverage, build_source_coverage
+from judgment_scan import scan_judgment_calls
+from transformer_runner import TransformerRunner, find_built_war
 
 
 def _asdict_list(items) -> list[dict]:

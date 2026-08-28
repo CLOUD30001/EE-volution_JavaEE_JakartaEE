@@ -9,7 +9,7 @@ import json
 import sys
 from pathlib import Path
 
-from .report_builder import build_impact_facts, write_impact_facts
+from report_builder import build_impact_facts, write_impact_facts
 
 
 def _read_json_file(path: Path) -> dict:
