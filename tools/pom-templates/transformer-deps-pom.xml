@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Minimal POM used by TransformerRunner._ensure_dependencies() to resolve the
+  Eclipse Transformer CLI JARs via Maven's dependency:copy-dependencies goal.
+
+  This file is bundled with the tool and is never edited by hand.
+  Resolved JARs are cached under <work_dir>/transformer-deps/target/dependency/
+  and are reused on every subsequent run without re-downloading.
+
+  Eclipse Transformer is licensed under EPL-2.0 OR Apache-2.0.
+  https://github.com/eclipse/transformer
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.ee-volution.tooling</groupId>
+  <artifactId>transformer-deps</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <description>
+    Dependency-only POM. Its sole purpose is to let Maven copy the Eclipse
+    Transformer CLI JARs (and their transitive runtime deps) into
+    target/dependency/ so TransformerRunner can build a -cp classpath and
+    invoke JakartaTransformerCLI directly without requiring a global install.
+  </description>
+
+  <dependencies>
+    <!-- Eclipse Transformer CLI — entry point: org.eclipse.transformer.cli.JakartaTransformerCLI -->
+    <dependency>
+      <groupId>org.eclipse.transformer</groupId>
+      <artifactId>org.eclipse.transformer.cli</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <!-- Jakarta EE transformation rules bundled separately from the core transformer -->
+    <dependency>
+      <groupId>org.eclipse.transformer</groupId>
+      <artifactId>org.eclipse.transformer.jakarta</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  </dependencies>
+</project>

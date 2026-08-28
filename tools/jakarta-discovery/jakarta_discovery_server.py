@@ -419,5 +419,9 @@ def parse_dependency_tree(repo_path: str) -> Dict[str, Any]:
     return manifests
 
 
-if __name__ == "__main__":
+def main() -> None:
     mcp.run()
+
+
+if __name__ == "__main__":
+    main()

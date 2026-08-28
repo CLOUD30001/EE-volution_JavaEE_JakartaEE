@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .transformer_runner import TransformRun
+from transformer_runner import TransformRun
 
 
 def _source_java_to_class_key(discovery_path: str) -> str | None:

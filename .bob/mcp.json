@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "jakarta-discovery": {
+      "command": "uv",
+      "args": [
+        "run",
+        "fastmcp",
+        "run",
+        "tools/jakarta-discovery/jakarta_discovery_server.py"
+      ]
+    },
+    "jakarta-impact": {
+      "command": "uv",
+      "args": [
+        "run",
+        "fastmcp",
+        "run",
+        "tools/run_jakarta_impact_server.py"
+      ]
+    }
+  }
+}

@@ -17,8 +17,8 @@ from pathlib import Path
 
 from fastmcp import FastMCP
 
-from .judgment_scan import scan_judgment_calls
-from .report_builder import build_impact_facts
+from judgment_scan import scan_judgment_calls
+from report_builder import build_impact_facts
 
 server = FastMCP(
     name="jakarta-impact-server",
