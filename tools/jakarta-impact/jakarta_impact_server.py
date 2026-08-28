@@ -12,12 +12,10 @@ exist in 2.0.0.
 """
 from __future__ import annotations
 
-import dataclasses
 from pathlib import Path
 
 from fastmcp import FastMCP
 
-from judgment_scan import scan_judgment_calls
 from report_builder import build_impact_facts
 
 server = FastMCP(
@@ -78,24 +76,6 @@ def analyze_impact(
     except FileNotFoundError as exc:
         # WAR not found — project not built yet.
         return {"error": str(exc)}
-
-
-@server.tool()
-def find_judgment_call_candidates(repo_path: str) -> list[dict]:
-    """Scan a project's Java source for javax-related patterns no rewrite tool
-    resolves mechanically: reflection on javax class names
-    (Class.forName("javax...")), custom serialization hooks on Serializable
-    classes, dynamic proxies, and ServiceLoader SPI registrations under
-    META-INF/services/javax.*.
-
-    These are pattern matches, not confirmed risks - e.g. a Serializable class is
-    flagged even when none of its fields are actually javax-typed; confirming that
-    is a follow-up step, not this tool's job. Does not require a built WAR or a
-    discovery report - runs standalone against any source tree, faster than
-    analyze_impact when that's all you need.
-    """
-    findings = scan_judgment_calls(Path(repo_path))
-    return [dataclasses.asdict(f) for f in findings]
 
 
 def main() -> None:
