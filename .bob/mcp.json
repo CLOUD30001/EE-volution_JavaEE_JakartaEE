@@ -4,10 +4,10 @@
       "command": "uv",
       "args": [
         "run",
-        "fastmcp",
-        "run",
+        "python",
         "tools/jakarta-discovery/jakarta_discovery_server.py"
       ],
+      "cwd": ".",
       "alwaysAllow": [
         "scan_javax_usage",
         "descriptor_audit",
@@ -19,13 +19,25 @@
       "command": "uv",
       "args": [
         "run",
-        "fastmcp",
-        "run",
+        "python",
         "tools/run_jakarta_impact_server.py"
       ],
+      "cwd": ".",
       "alwaysAllow": [
         "analyze_impact",
         "find_judgment_call_candidates"
+      ]
+    },
+    "jakarta-plan": {
+      "command": "uv",
+      "args": [
+        "run",
+        "python",
+        "tools/run_jakarta_plan_server.py"
+      ],
+      "cwd": ".",
+      "alwaysAllow": [
+        "plan_migration"
       ]
     }
   }
