@@ -1,6 +1,6 @@
 # Jakarta Impact MCP Server
 
-A [FastMCP](https://github.com/jlowin/fastmcp) server that exposes two tools for **Phase 1 — Impact Analysis** of the EE-volution JavaEE → JakartaEE migration pipeline.
+A [FastMCP](https://github.com/jlowin/fastmcp) server that exposes one tool for **Phase 1 — Impact Analysis** of the EE-volution JavaEE → JakartaEE migration pipeline.
 
 This server is **Layer A** — it produces pure, deterministic facts. Risk classification, prioritisation, and the decision of what is automatable are the responsibility of the calling agent (Layer B).
 
@@ -18,9 +18,7 @@ Phase 1 (Impact Analysis)  ←  this server
                         impact-facts.json   →  Phase 2 (Migration Planning)
 ```
 
-`analyze_impact` consumes the WAR produced by your Maven build and the `discovery-report.json` produced by [`jakarta-discovery-server`](../jakarta-discovery/README.md). It delegates namespace rewriting to **Eclipse Transformer** (invoked as a subprocess via its CLI JAR) and records exactly which source files were mechanically rewritten and which were not.
-
-`find_judgment_call_candidates` is a standalone source scanner that flags constructs no rewrite tool can resolve automatically — reflection on javax class names, dynamic proxies, custom serialisation hooks, and SPI registrations.
+`analyze_impact` consumes the WAR produced by your Maven build and the `discovery-report.json` produced by [`jakarta-discovery-server`](../jakarta-discovery/README.md). It delegates namespace rewriting to **Eclipse Transformer** (invoked as a subprocess via its CLI JAR), records exactly which source files were mechanically rewritten and which were not, and also scans the source tree for judgment-call candidates (reflection, dynamic proxies, custom serialisation, SPI registrations) — all in a single call.
 
 ---
 
@@ -28,7 +26,7 @@ Phase 1 (Impact Analysis)  ←  this server
 
 ```
 tools/jakarta-impact/
-├── jakarta_impact_server.py   MCP server entry point — two @server.tool() definitions
+├── jakarta_impact_server.py   MCP server entry point — one @server.tool() definition
 ├── report_builder.py          Orchestrates everything; produces the impact-facts.json structure
 ├── transformer_runner.py      Subprocess wrapper around Eclipse Transformer CLI; parses its verbose log
 ├── discovery_diff.py          Cross-references TransformRun against discovery-report.json per source file
@@ -151,6 +149,25 @@ Runs Eclipse Transformer against the pre-built WAR (via `java -cp … JakartaTra
 | `transformerFound` | bool | Whether Transformer processed this descriptor |
 | `transformerChanged` | bool \| null | Whether Transformer changed it; `null` when not found |
 
+**`judgmentCallCandidates` entry fields**
+
+These are pattern-matched constructs that Eclipse Transformer structurally cannot resolve. They are always included in `analyze_impact` output — intentionally over-reported; false-positive triage is Layer B's responsibility.
+
+| Field | Type | Meaning |
+|---|---|---|
+| `file` | string | Repository-relative source path |
+| `kind` | string | Detection category (see table below) |
+| `detail` | string | Human-readable description of the specific match |
+
+| `kind` value | What is matched | Why Transformer cannot fix it |
+|---|---|---|
+| `reflection_string_literal` | `Class.forName("javax.…")` | String literals are not bytecode symbol references; Transformer only rewrites bytecode imports and descriptor text |
+| `dynamic_proxy` | `Proxy.newProxyInstance(…)` | Proxy interface names may be passed as runtime strings; requires manual verification |
+| `serializable_class` | Any class that `implements Serializable` | Serialised class descriptors embed the fully-qualified class name; a `javax→jakarta` rename changes the serial form. The `detail` field distinguishes classes with custom hooks (`readObject` / `writeObject` / `readResolve` / `writeReplace`) from those without. |
+| `spi_registration` | `META-INF/services/javax.*` files under `src/main/resources/` | SPI service-file names are plain text strings; Transformer does not rename them |
+
+> **Note on `serializable_class`:** A `Serializable` class is flagged even when none of its fields are `javax`-typed. Confirming real risk requires type resolution (AST / compiler-level), which this scanner deliberately does not attempt. That triage is Layer B's job.
+
 ---
 
 #### WAR path mapping rules
@@ -166,53 +183,6 @@ Path mapping in [`discovery_diff.py`](discovery_diff.py) follows the standard Ma
 | `server.xml` / `pom.xml` / anything else | `null` → `transformerFound: false`, `transformerChanged: null` |
 
 Unmapped paths are **never silently dropped** — they always appear in `descriptorCoverage` with `warPath: null`.
-
----
-
-### 2. `find_judgment_call_candidates`
-
-Scans Java source files for constructs that Eclipse Transformer **structurally cannot resolve**. No WAR, no build, no JDK required — runs standalone against any source tree.
-
-> This tool intentionally over-reports. False-positive triage is the responsibility of the calling agent (Layer B).
-
-**Input**
-
-| Parameter | Type | Required | Description |
-|---|---|---|---|
-| `repo_path` | string | ✅ | Absolute or relative path to the repository root |
-
-**Output** — a flat list of findings (same as `judgmentCallCandidates` inside `impact-facts.json`)
-
-```json
-[
-  {
-    "file": "src/main/java/com/example/ReflectionUser.java",
-    "kind": "reflection_string_literal",
-    "detail": "Class.forName(\"javax.persistence.EntityManager\") - string literal invisible to import-based tooling"
-  },
-  {
-    "file": "src/main/java/com/example/OrderEntity.java",
-    "kind": "serializable_class",
-    "detail": "implements Serializable, with custom read/write hooks - check field types by hand"
-  },
-  {
-    "file": "src/main/resources/META-INF/services/javax.persistence.spi.PersistenceProvider",
-    "kind": "spi_registration",
-    "detail": "ServiceLoader registration file named after a javax interface: javax.persistence.spi.PersistenceProvider"
-  }
-]
-```
-
-**Detection categories (`kind` values)**
-
-| Kind | What is matched | Why Transformer cannot fix it |
-|---|---|---|
-| `reflection_string_literal` | `Class.forName("javax.…")` — string literal with a javax class name | String literals are not bytecode symbol references; Transformer only rewrites bytecode imports and descriptor text |
-| `dynamic_proxy` | `Proxy.newProxyInstance(…)` — any occurrence | Proxy interface names may be passed as runtime strings; requires manual verification |
-| `serializable_class` | Any class that `implements Serializable` | Serialised class descriptors embed the fully-qualified class name; a javax→jakarta rename changes the serial form. The `detail` field distinguishes classes that also declare custom serialisation hooks (`readObject` / `writeObject` / `readResolve` / `writeReplace`) from those that don't. |
-| `spi_registration` | `META-INF/services/javax.*` filenames under `src/main/resources/` | SPI service-file names and their entries are plain text strings, not bytecode; Transformer does not rename service files. |
-
-> **Note on `serializable_class`:** A Serializable class is flagged even when none of its fields are javax-typed. Determining whether a field is actually javax-typed requires type resolution (AST / compiler-level analysis) which this scanner deliberately does not attempt. That triage is Layer B's job.
 
 ---
 

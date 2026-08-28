@@ -98,7 +98,7 @@ def build_descriptor_coverage(discovery: dict, run: TransformRun) -> list[Descri
         entries.append(DescriptorCoverageEntry(
             sourceFile=source_file,
             warPath=war_path,
-            riskCategory=d.get("riskCategory"),
+            riskCategory=d.get("riskCategory") or d.get("risk_category"),
             transformerFound=found,
             transformerChanged=changed,
         ))
