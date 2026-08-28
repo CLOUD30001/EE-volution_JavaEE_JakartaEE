@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.acme.legacy</groupId>
+    <artifactId>javaee8-order-management</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>JavaEE8 Order Management System (Legacy)</name>
+    <description>
+        Sample Java EE 8 servlet-based application, deployable on IBM/Open Liberty,
+        used as both a runnable hackathon demo AND a migration-analysis fixture for the
+        JavaEE8 -&gt; Jakarta EE 10 migration agent. Deliberately touches most Java EE 8
+        specs (Servlet, JSP, JSF, EJB, JPA, CDI, Bean Validation, JAX-RS, JAX-WS, JMS,
+        JSON-B, WebSocket, Concurrency Utilities, Java EE Security API, JAXB) plus
+        server-specific descriptors, so Discovery/Impact/Plan stages have realistic
+        material to analyze.
+    </description>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <liberty.var.default.http.port>9080</liberty.var.default.http.port>
+        <liberty.var.default.https.port>9443</liberty.var.default.https.port>
+    </properties>
+
+    <dependencies>
+        <!-- Aggregate Java EE 8 full-platform API (javax namespace) - provided by the target app server -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>8.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JAXB was removed from the JDK starting with Java 11; legacy EE8 apps on JDK8
+             often still declare it explicitly. Kept separate from javaee-api on purpose
+             to represent an "external jar" the migration must also account for. -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.1</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- javax:javaee-api:8.0.1's POM does NOT declare a JAX-WS dependency, even
+             though the full EE8 platform includes it. On JDK 8, javax.jws/javax.xml.ws
+             happen to be bundled in the JDK itself, which masked this gap during initial
+             testing; JDK 11+ removed those bundled classes, so this must be explicit.
+             javax.xml.ws.* (the JAX-WS API proper) and javax.jws.* (the JSR 181
+             @WebService/@WebMethod annotations) are two separate artifacts. -->
+        <dependency>
+            <groupId>javax.xml.ws</groupId>
+            <artifactId>jaxws-api</artifactId>
+            <version>2.3.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.jws</groupId>
+            <artifactId>javax.jws-api</artifactId>
+            <version>1.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Bean Validation reference implementation - non-javax groupId, no namespace
+             change required; only the javax.validation.* imports in our source need it. -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.21.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Plain utility library with no javax/jakarta surface at all - included as a
+             contrast case: this dependency needs no migration action. -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+
+        <!-- Embedded JDBC driver backing the jdbc/OrderManagementDS datasource defined in
+             src/main/liberty/config/server.xml. Not packaged into the WAR (scope=provided) -
+             the liberty-maven-plugin copies it into the running server's shared resources
+             directory instead, per the copyDependencies config below. -->
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.14.2.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>javaee8-order-management</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <!-- JMS/MDB classes are intentionally excluded from the build so a
+                         missing messaging-engine config on the target Liberty server can't
+                         block the whole app from deploying. The source stays in the tree
+                         (com.acme.legacy.jms, com.acme.legacy.ejb.OrderNotifierBean) so the
+                         Discovery/Impact Analysis stages can still find and assess it. -->
+                    <excludes>
+                        <exclude>**/jms/OrderQueueSender.java</exclude>
+                        <exclude>**/ejb/OrderNotifierBean.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <!-- Runs/deploys this WAR on Open Liberty. Use: mvn liberty:dev  (or liberty:run)
+                 Server config lives in src/main/liberty/config/server.xml. -->
+            <plugin>
+                <groupId>io.openliberty.tools</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>3.8.2</version>
+                <configuration>
+                    <serverName>javaee8OrderMgmtServer</serverName>
+                    <copyDependencies>
+                        <dependencyGroup>
+                            <location>${project.build.directory}/liberty/wlp/usr/shared/resources/derby</location>
+                            <dependency>
+                                <groupId>org.apache.derby</groupId>
+                                <artifactId>derby</artifactId>
+                            </dependency>
+                        </dependencyGroup>
+                    </copyDependencies>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
