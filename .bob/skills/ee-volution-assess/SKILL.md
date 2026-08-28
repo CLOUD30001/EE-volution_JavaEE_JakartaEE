@@ -25,7 +25,7 @@ value is missing):
 |---|---|
 | `repo_path` | Absolute path to the target Maven project root. Must contain a `pom.xml`. |
 | `java_home` | Absolute path to a **JDK 11+** home (JDK 17 or 19 preferred). Used only by Eclipse Transformer — not the project's compile JDK. |
-| `output_dir` | Directory where all JSON reports are written. Default: `<repo_path>/jakarta-migration-reports`. Create it if it does not exist. |
+| `output_dir` | Directory where all JSON reports are written. Default: `<repo_path>/../jakarta-migration-reports` (i.e. a sibling of the project root, **not inside it**). Create it if it does not exist. Keep reports outside the legacy project so they are never accidentally committed or packaged with it. |
 | `mvn_cmd` | Maven executable. Default: `mvn`. Override only if `mvn` is not on PATH. |
 
 Confirm all four values with the user before proceeding.
@@ -177,6 +177,19 @@ After all three phases complete successfully, produce a consolidated status mess
      Judgment-call candidates : <N>
      Total migration effort   : <N.N> hours
 ```
+
+Then ask:
+
+> "Layer A is complete. Shall I proceed to **Layer B** — triage the judgment-call candidates,
+> produce `final-plan.json` with a risk register, sprint roadmap, and work items, and render
+> the HTML sign-off report — all in this same session?"
+
+- If the user says **yes** (or equivalent): immediately continue with the `ee-volution-plan`
+ skill steps, using the same `output_dir` as this skill.  No need to re-ask for `output_dir`,
+ `project_name`, `assignee`, or `sprint_capacity_hours` unless the user supplied non-default
+ values earlier — carry those forward.  Pass `output_dir` as the Layer-B input directory.
+- If the user says **no**: stop here.  The three Layer-A artefacts are in `output_dir` and the
+ user can invoke the `ee-volution-plan` skill independently at any time.
 
 ---
 
