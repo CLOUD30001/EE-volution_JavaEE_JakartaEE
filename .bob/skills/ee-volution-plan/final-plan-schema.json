@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ee-volution-final-plan-schema",
+  "title": "EE-volution Final Migration Plan",
+  "description": "Layer-B judgment output: triaged migration plan with decisions, risk register, sprint roadmap, and sign-off metadata. Produced by the ee-volution-plan skill.",
+  "type": "object",
+  "required": [
+    "stage",
+    "repoPath",
+    "generatedAt",
+    "sourceReports",
+    "projectMeta",
+    "targetPlatform",
+    "riskRegister",
+    "workItems",
+    "sprintRoadmap",
+    "effortSummary",
+    "signOff"
+  ],
+  "properties": {
+    "stage": {
+      "type": "string",
+      "const": "final-plan-layer-b",
+      "description": "Fixed stage identifier — always 'final-plan-layer-b'."
+    },
+    "repoPath": {
+      "type": "string",
+      "description": "Absolute path to the target Maven project root."
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp when this plan was produced."
+    },
+    "sourceReports": {
+      "type": "object",
+      "description": "Paths to the upstream Layer-A artefacts this plan was derived from.",
+      "required": ["discoveryReport", "impactFacts", "migrationPlan"],
+      "properties": {
+        "discoveryReport": { "type": "string" },
+        "impactFacts":     { "type": "string" },
+        "migrationPlan":   { "type": "string" }
+      }
+    },
+    "projectMeta": {
+      "type": "object",
+      "description": "Human-readable project identity for report headers.",
+      "required": ["projectName", "artifactId", "currentRuntime", "currentJavaEEVersion"],
+      "properties": {
+        "projectName":           { "type": "string" },
+        "artifactId":            { "type": "string" },
+        "currentRuntime":        { "type": "string", "examples": ["IBM WebSphere Liberty 22.x"] },
+        "currentJavaEEVersion":  { "type": "string", "examples": ["Java EE 8"] }
+      }
+    },
+    "targetPlatform": {
+      "type": "object",
+      "description": "Migration target confirmed by the judgment layer (grounded in REFERENCE.md §1).",
+      "required": ["jakartaEEVersion", "jdk", "runtime"],
+      "properties": {
+        "jakartaEEVersion": { "type": "string", "examples": ["Jakarta EE 10"] },
+        "jdk":              { "type": "string", "examples": ["JDK 17"] },
+        "runtime":          { "type": "string", "examples": ["Open Liberty 23.0.0.6+"] }
+      }
+    },
+    "riskRegister": {
+      "type": "array",
+      "description": "Triaged risk items. Each entry resolves one judgment-call candidate or behavioral risk.",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "source", "severity", "classification", "resolution"],
+        "properties": {
+          "id":             { "type": "string", "examples": ["RISK-001"] },
+          "title":          { "type": "string" },
+          "source":         { "type": "string", "description": "Finding ID from migration-plan.json or 'behavioral-change' / 'dependency-gap'." },
+          "severity":       { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+          "classification": {
+            "type": "string",
+            "enum": ["pre-existing-latent-defect", "migration-introduced-risk", "behavioral-change", "dependency-gap"],
+            "description": "How this risk is classified — see REFERENCE.md §4 note on beans.xml for the latent-defect rule."
+          },
+          "resolution":     { "type": "string", "description": "Agreed resolution or mitigation action." },
+          "referenceSection": { "type": "string", "description": "REFERENCE.md §N.row that grounds this decision.", "examples": ["REFERENCE.md §4 beans.xml"] }
+        }
+      }
+    },
+    "workItems": {
+      "type": "array",
+      "description": "Ordered, actionable work items derived from migration-plan.json batches. One work item per finding or logical group.",
+      "items": {
+        "type": "object",
+        "required": ["id", "batch", "title", "description", "files", "effortHours", "assignee", "status"],
+        "properties": {
+          "id":           { "type": "string", "examples": ["WI-001"] },
+          "batch":        { "type": "string", "enum": ["needs_human_input", "foundational", "mechanical", "manual_remediation"] },
+          "title":        { "type": "string" },
+          "description":  { "type": "string", "description": "What must be done, including any REFERENCE.md grounding for non-trivial steps." },
+          "files":        { "type": "array", "items": { "type": "string" } },
+          "effortHours":  { "type": "number", "minimum": 0 },
+          "assignee":     { "type": "string", "description": "Team or person responsible. Use 'unassigned' if not yet determined." },
+          "status":       { "type": "string", "enum": ["pending", "in-progress", "done", "blocked"] },
+          "dependsOn":    { "type": "array", "items": { "type": "string" }, "description": "IDs of work items that must complete before this one." },
+          "referenceSection": { "type": "string", "description": "REFERENCE.md §N.row that specifies the exact change (e.g. §4 web.xml, §5, §6)." }
+        }
+      }
+    },
+    "sprintRoadmap": {
+      "type": "array",
+      "description": "Sprints in execution order. Each sprint groups work items that can run together.",
+      "items": {
+        "type": "object",
+        "required": ["sprint", "goal", "workItemIds", "totalEffortHours"],
+        "properties": {
+          "sprint":           { "type": "integer", "minimum": 1 },
+          "goal":             { "type": "string" },
+          "workItemIds":      { "type": "array", "items": { "type": "string" } },
+          "totalEffortHours": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "effortSummary": {
+      "type": "object",
+      "description": "Rolled-up effort totals by batch.",
+      "required": ["totalHours", "byBatch"],
+      "properties": {
+        "totalHours": { "type": "number", "minimum": 0 },
+        "byBatch": {
+          "type": "object",
+          "properties": {
+            "needs_human_input":  { "type": "number" },
+            "foundational":       { "type": "number" },
+            "mechanical":         { "type": "number" },
+            "manual_remediation": { "type": "number" }
+          }
+        }
+      }
+    },
+    "signOff": {
+      "type": "object",
+      "description": "Sign-off metadata for governance / change-management gate.",
+      "required": ["status", "preparedBy"],
+      "properties": {
+        "status":      { "type": "string", "enum": ["draft", "review", "approved", "rejected"] },
+        "preparedBy":  { "type": "string" },
+        "reviewedBy":  { "type": "string" },
+        "approvedBy":  { "type": "string" },
+        "approvedAt":  { "type": "string", "format": "date-time" },
+        "notes":       { "type": "string" }
+      }
+    }
+  }
+}
