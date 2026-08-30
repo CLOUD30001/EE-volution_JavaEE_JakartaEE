@@ -1,0 +1,159 @@
+{
+  "javax:javaee-api": {
+    "action": "replace",
+    "targetGroupId": "jakarta.platform",
+    "targetArtifactId": "jakarta.jakartaee-api",
+    "targetVersion": "10.0.0",
+    "scope": "provided"
+  },
+
+  "javax.servlet:javax.servlet-api": {
+    "action": "replace",
+    "targetGroupId": "jakarta.servlet",
+    "targetArtifactId": "jakarta.servlet-api",
+    "targetVersion": "6.0.0",
+    "scope": "provided"
+  },
+
+  "javax.persistence:javax.persistence-api": {
+    "action": "replace",
+    "targetGroupId": "jakarta.persistence",
+    "targetArtifactId": "jakarta.persistence-api",
+    "targetVersion": "3.1.0",
+    "scope": "provided"
+  },
+
+  "javax.faces:javax.faces-api": {
+    "action": "replace",
+    "targetGroupId": "jakarta.faces",
+    "targetArtifactId": "jakarta.faces-api",
+    "targetVersion": "4.0.1",
+    "scope": "provided"
+  },
+
+  "javax.ejb:javax.ejb-api": {
+    "action": "replace",
+    "targetGroupId": "jakarta.ejb",
+    "targetArtifactId": "jakarta.ejb-api",
+    "targetVersion": "4.0.0",
+    "scope": "provided"
+  },
+
+  "javax.ws.rs:javax.ws.rs-api": {
+    "action": "replace",
+    "targetGroupId": "jakarta.ws.rs",
+    "targetArtifactId": "jakarta.ws.rs-api",
+    "targetVersion": "3.1.0",
+    "scope": "provided"
+  },
+
+  "javax.validation:validation-api": {
+    "action": "replace",
+    "targetGroupId": "jakarta.validation",
+    "targetArtifactId": "jakarta.validation-api",
+    "targetVersion": "3.0.2",
+    "scope": "provided"
+  },
+
+  "javax.xml.bind:jaxb-api": {
+    "action": "replace",
+    "targetGroupId": "jakarta.xml.bind",
+    "targetArtifactId": "jakarta.xml.bind-api",
+    "targetVersion": "4.0.0",
+    "scope": "provided"
+  },
+
+  "javax.enterprise:cdi-api": {
+    "action": "replace",
+    "targetGroupId": "jakarta.enterprise",
+    "targetArtifactId": "jakarta.enterprise.cdi-api",
+    "targetVersion": "4.0.1",
+    "scope": "provided"
+  },
+
+  "javax.inject:javax.inject": {
+    "action": "replace",
+    "targetGroupId": "jakarta.inject",
+    "targetArtifactId": "jakarta.inject-api",
+    "targetVersion": "2.0.1",
+    "scope": "provided"
+  },
+
+  "javax.annotation:javax.annotation-api": {
+    "action": "replace",
+    "targetGroupId": "jakarta.annotation",
+    "targetArtifactId": "jakarta.annotation-api",
+    "targetVersion": "2.1.1",
+    "scope": "provided"
+  },
+
+  "javax.jms:javax.jms-api": {
+    "action": "replace",
+    "targetGroupId": "jakarta.jms",
+    "targetArtifactId": "jakarta.jms-api",
+    "targetVersion": "3.1.0",
+    "scope": "provided"
+  },
+
+  "javax.websocket:javax.websocket-api": {
+    "action": "replace",
+    "targetGroupId": "jakarta.websocket",
+    "targetArtifactId": "jakarta.websocket-api",
+    "targetVersion": "2.1.1",
+    "scope": "provided"
+  },
+
+  "javax.json.bind:javax.json.bind-api": {
+    "action": "replace",
+    "targetGroupId": "jakarta.json.bind",
+    "targetArtifactId": "jakarta.json.bind-api",
+    "targetVersion": "3.0.0",
+    "scope": "provided"
+  },
+
+  "javax.xml.ws:jaxws-api": {
+    "action": "replace",
+    "targetGroupId": "jakarta.xml.ws",
+    "targetArtifactId": "jakarta.xml.ws-api",
+    "targetVersion": "4.0.0",
+    "scope": "provided"
+  },
+
+  "javax.jws:javax.jws-api": {
+    "action": "remove"
+  },
+
+  "jakarta.xml.ws:jakarta.xml.ws-api": {
+    "action": "add",
+    "targetGroupId": "jakarta.xml.ws",
+    "targetArtifactId": "jakarta.xml.ws-api",
+    "targetVersion": "4.0.0",
+    "scope": "provided"
+  },
+
+  "com.sun.xml.ws:jaxws-rt": {
+    "action": "add",
+    "targetGroupId": "com.sun.xml.ws",
+    "targetArtifactId": "jaxws-rt",
+    "targetVersion": "4.0.3",
+    "scope": "runtime"
+  },
+
+  "org.glassfish.jaxb:jaxb-runtime": {
+    "action": "version_bump",
+    "targetVersion": "4.0.3"
+  },
+
+  "com.sun.xml.bind:jaxb-impl": {
+    "action": "add",
+    "targetGroupId": "com.sun.xml.bind",
+    "targetArtifactId": "jaxb-impl",
+    "targetVersion": "4.0.3",
+    "scope": "runtime"
+  },
+
+  "org.hibernate.validator:hibernate-validator": {
+    "action": "version_bump",
+    "targetVersion": "8.0.1.Final"
+  }
+}
