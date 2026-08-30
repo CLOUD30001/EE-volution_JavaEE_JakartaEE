@@ -1,0 +1,18 @@
+{
+  "javaee-8.0": "jakartaee-10.0",
+  "servlet-4.0": "servlet-6.0",
+  "jpa-2.2": "persistence-3.1",
+  "ejbLite-3.2": "enterpriseBeans-4.0",
+  "jaxrs-2.1": "restfulWS-3.1",
+  "jsf-2.3": "faces-4.0",
+  "cdi-2.0": "cdi-4.0",
+  "beanValidation-2.0": "beanValidation-3.0",
+  "webSocket-1.1": "websocket-2.1",
+  "jsonb-1.0": "jsonb-3.0",
+  "jaxb-2.2": "xmlBinding-4.0",
+  "jaxws-2.2": "xmlWS-4.0",
+  "messaging-3.0": "messaging-3.1",
+  "concurrent-1.0": "concurrent-3.0",
+  "appSecurity-3.0": "appSecurity-5.0",
+  "mpConfig-2.0": "mpConfig-3.1"
+}

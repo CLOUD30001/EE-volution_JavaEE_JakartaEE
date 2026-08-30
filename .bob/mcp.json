@@ -39,6 +39,18 @@
       "alwaysAllow": [
         "plan_migration"
       ]
+    },
+    "jakarta-migrate": {
+      "command": "uv",
+      "args": [
+        "run",
+        "python",
+        "tools/run_jakarta_migrate_server.py"
+      ],
+      "cwd": ".",
+      "alwaysAllow": [
+        "run_migration"
+      ]
     }
   }
 }
