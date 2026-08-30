@@ -1,0 +1,9 @@
+# Python
+*.pyc
+**/__pycache__/
+.python-version
+uv.lock
+
+# Generated reports & artifacts
+reports/
+*.html
