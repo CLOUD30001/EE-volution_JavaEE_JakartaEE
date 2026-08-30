@@ -1,0 +1,466 @@
+{
+  "status": "partial",
+  "steps": [
+    {
+      "name": "preflight",
+      "status": "success",
+      "changes": [],
+      "errors": [],
+      "notes": "Git unavailable — changes will not be committed | final-plan.json sign-off status is 'draft'"
+    },
+    {
+      "name": "transform_source",
+      "status": "success",
+      "changes": [
+        {
+          "file": "java/com/acme/legacy/cdi/AuditInterceptor.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/cdi/AuditLogged.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/cdi/OrderEventObserver.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/concurrency/AsyncReportGenerator.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/ejb/InventoryManagerBean.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/ejb/OrderNotifierBean.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/ejb/OrderProcessorBean.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/entity/Customer.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/entity/Order.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/entity/OrderItem.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/jaxrs/ApiApplication.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/jaxrs/OrderResource.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/jaxws/CustomerLookupService.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/jms/OrderQueueSender.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/jsf/OrderBackingBean.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/json/OrderJsonMapper.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/security/AppIdentityStore.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/servlet/AppContextListener.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/servlet/OrderExportServlet.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/servlet/RequestLoggingFilter.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/validation/SkuValidator.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/validation/ValidSku.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/websocket/OrderStatusEndpoint.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "java/com/acme/legacy/xml/CustomerXmlMapper.java",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "resources/META-INF/persistence.xml",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "webapp/WEB-INF/beans.xml",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "webapp/WEB-INF/faces-config.xml",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "webapp/WEB-INF/web.xml",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        },
+        {
+          "file": "C:/IBM_BOB/EE-volution_JavaEE_JakartaEE/javaee8-order-management/target/jakarta-migrate/transformer/src-copy",
+          "action": "transformer_changed",
+          "old_coordinate": "",
+          "new_coordinate": "",
+          "map_key": ""
+        }
+      ],
+      "errors": [],
+      "notes": "29 files changed by Transformer"
+    },
+    {
+      "name": "apply_transformer_output",
+      "status": "success",
+      "changes": [],
+      "errors": [],
+      "notes": "Copied transformed output from C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\target\\jakarta-migrate\\transformer\\src-transformed over C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\src\\main"
+    },
+    {
+      "name": "gap_fill",
+      "status": "success",
+      "changes": [
+        {
+          "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\src\\main\\webapp\\orders.xhtml",
+          "action": "replace",
+          "old_coordinate": "http://xmlns.jcp.org/jsf/html",
+          "new_coordinate": "jakarta.faces.html",
+          "map_key": "http://xmlns.jcp.org/jsf/html"
+        },
+        {
+          "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\src\\main\\webapp\\orders.xhtml",
+          "action": "replace",
+          "old_coordinate": "http://xmlns.jcp.org/jsf/core",
+          "new_coordinate": "jakarta.faces.core",
+          "map_key": "http://xmlns.jcp.org/jsf/core"
+        }
+      ],
+      "errors": [],
+      "notes": "1 files patched, 0 SPI renames, 13 manual_required items"
+    },
+    {
+      "name": "patch_pom",
+      "status": "success",
+      "changes": [
+        {
+          "file": "javaee8-order-management\\pom.xml",
+          "action": "replace",
+          "old_coordinate": "javax:javaee-api:8.0.1",
+          "new_coordinate": "jakarta.platform:jakarta.jakartaee-api:10.0.0",
+          "map_key": "javax:javaee-api"
+        },
+        {
+          "file": "javaee8-order-management\\pom.xml",
+          "action": "replace",
+          "old_coordinate": "javax.xml.bind:jaxb-api:2.3.1",
+          "new_coordinate": "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0",
+          "map_key": "javax.xml.bind:jaxb-api"
+        },
+        {
+          "file": "javaee8-order-management\\pom.xml",
+          "action": "replace",
+          "old_coordinate": "javax.xml.ws:jaxws-api:2.3.1",
+          "new_coordinate": "jakarta.xml.ws:jakarta.xml.ws-api:4.0.0",
+          "map_key": "javax.xml.ws:jaxws-api"
+        },
+        {
+          "file": "javaee8-order-management\\pom.xml",
+          "action": "remove",
+          "old_coordinate": "javax.jws:javax.jws-api:1.1",
+          "new_coordinate": "",
+          "map_key": "javax.jws:javax.jws-api"
+        },
+        {
+          "file": "javaee8-order-management\\pom.xml",
+          "action": "add",
+          "old_coordinate": "",
+          "new_coordinate": "com.sun.xml.ws:jaxws-rt:4.0.3",
+          "map_key": "com.sun.xml.ws:jaxws-rt"
+        },
+        {
+          "file": "javaee8-order-management\\pom.xml",
+          "action": "version_bump",
+          "old_coordinate": "org.glassfish.jaxb:jaxb-runtime:2.3.1",
+          "new_coordinate": "org.glassfish.jaxb:jaxb-runtime:4.0.3",
+          "map_key": "org.glassfish.jaxb:jaxb-runtime"
+        },
+        {
+          "file": "javaee8-order-management\\pom.xml",
+          "action": "add",
+          "old_coordinate": "",
+          "new_coordinate": "com.sun.xml.bind:jaxb-impl:4.0.3",
+          "map_key": "com.sun.xml.bind:jaxb-impl"
+        },
+        {
+          "file": "javaee8-order-management\\pom.xml",
+          "action": "version_bump",
+          "old_coordinate": "org.hibernate.validator:hibernate-validator:6.0.21.Final",
+          "new_coordinate": "org.hibernate.validator:hibernate-validator:8.0.1.Final",
+          "map_key": "org.hibernate.validator:hibernate-validator"
+        },
+        {
+          "file": "javaee8-order-management\\pom.xml",
+          "action": "compiler_bump",
+          "old_coordinate": "compiler:1.8",
+          "new_coordinate": "compiler:17",
+          "map_key": "compiler_source_target"
+        }
+      ],
+      "errors": [],
+      "notes": "9 pom.xml changes applied"
+    },
+    {
+      "name": "patch_server_xml",
+      "status": "success",
+      "changes": [
+        {
+          "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\src\\main\\liberty\\config\\server.xml",
+          "action": "replace",
+          "old_coordinate": "javaee-8.0",
+          "new_coordinate": "jakartaee-10.0",
+          "map_key": "javaee-8.0"
+        }
+      ],
+      "errors": [],
+      "notes": "1 features updated"
+    },
+    {
+      "name": "git_commit",
+      "status": "skipped",
+      "changes": [],
+      "errors": [],
+      "notes": "Git not available — skipped (not an error)"
+    },
+    {
+      "name": "build_verify",
+      "status": "failed",
+      "changes": [],
+      "errors": [
+        "mvn package returned 1"
+      ],
+      "notes": "exit code 1"
+    },
+    {
+      "name": "deploy",
+      "status": "skipped",
+      "changes": [],
+      "errors": [],
+      "notes": "Deploy skipped — liberty_available=False or dry_run=True"
+    }
+  ],
+  "skipped_items": [],
+  "manual_required": [
+    {
+      "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\src\\main\\java\\com\\acme\\legacy\\ejb\\OrderNotifierBean.java",
+      "action": "manual_required",
+      "old_coordinate": "javax.jms.Queue",
+      "new_coordinate": "jakarta.jms.Queue",
+      "map_key": "literal_not_found_verbatim"
+    },
+    {
+      "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\pom.xml",
+      "action": "manual_required",
+      "old_coordinate": "javax.xml.bind",
+      "new_coordinate": "",
+      "map_key": "unresolvable_prefix"
+    },
+    {
+      "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\pom.xml",
+      "action": "manual_required",
+      "old_coordinate": "javax.jws",
+      "new_coordinate": "",
+      "map_key": "unresolvable_prefix"
+    },
+    {
+      "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\pom.xml",
+      "action": "manual_required",
+      "old_coordinate": "javax.xml.ws",
+      "new_coordinate": "",
+      "map_key": "unresolvable_prefix"
+    },
+    {
+      "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\pom.xml",
+      "action": "manual_required",
+      "old_coordinate": "javax.xml.ws",
+      "new_coordinate": "",
+      "map_key": "unresolvable_prefix"
+    },
+    {
+      "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\pom.xml",
+      "action": "manual_required",
+      "old_coordinate": "javax.jws",
+      "new_coordinate": "",
+      "map_key": "unresolvable_prefix"
+    },
+    {
+      "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\pom.xml",
+      "action": "manual_required",
+      "old_coordinate": "javax.xml.ws",
+      "new_coordinate": "",
+      "map_key": "unresolvable_prefix"
+    },
+    {
+      "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\pom.xml",
+      "action": "manual_required",
+      "old_coordinate": "javax.jws",
+      "new_coordinate": "",
+      "map_key": "unresolvable_prefix"
+    },
+    {
+      "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\pom.xml",
+      "action": "manual_required",
+      "old_coordinate": "javax.jws",
+      "new_coordinate": "",
+      "map_key": "unresolvable_prefix"
+    },
+    {
+      "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\pom.xml",
+      "action": "manual_required",
+      "old_coordinate": "javax.validation",
+      "new_coordinate": "",
+      "map_key": "unresolvable_prefix"
+    },
+    {
+      "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\src\\main\\resources\\META-INF\\persistence.xml",
+      "action": "manual_required",
+      "old_coordinate": "javax.persistence.schema-generation.database.action",
+      "new_coordinate": "jakarta.persistence.schema-generation.database.action",
+      "map_key": "literal_not_found_verbatim"
+    },
+    {
+      "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\src\\main\\webapp\\WEB-INF\\web.xml",
+      "action": "manual_required",
+      "old_coordinate": "javax.faces.PROJECT_STAGE",
+      "new_coordinate": "jakarta.faces.PROJECT_STAGE",
+      "map_key": "literal_not_found_verbatim"
+    },
+    {
+      "file": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\src\\main\\webapp\\WEB-INF\\web.xml",
+      "action": "manual_required",
+      "old_coordinate": "javax.faces.webapp.FacesServlet",
+      "new_coordinate": "jakarta.faces.webapp.FacesServlet",
+      "map_key": "literal_not_found_verbatim"
+    }
+  ],
+  "build_result": {
+    "return_code": 1,
+    "stdout_tail": "[INFO] Scanning for projects...\n[INFO] \n[INFO] --------------< com.acme.legacy:javaee8-order-management >--------------\n[INFO] Building JavaEE8 Order Management System (Legacy) 1.0.0-SNAPSHOT\n[INFO]   from pom.xml\n[INFO] --------------------------------[ war ]---------------------------------\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ javaee8-order-management ---\n[INFO] Copying 1 resource from src\\main\\resources to target\\classes\n[INFO] \n[INFO] --- compiler:3.11.0:compile (default-compile) @ javaee8-order-management ---\n[INFO] Changes detected - recompiling the module! :source\n[INFO] Compiling 24 source files with javac [debug target 17] to target\\classes\n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD FAILURE\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  1.708 s\n[INFO] Finished at: 2026-08-30T18:17:08+05:30\n[INFO] ------------------------------------------------------------------------\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project javaee8-order-management: Fatal error compiling: invalid target release: 17 -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException\n",
+    "stderr_tail": ""
+  },
+  "deploy_result": {
+    "return_code": -1,
+    "liberty_available": false,
+    "notes": "Deploy skipped — liberty_available=False or dry_run=True"
+  },
+  "dry_run": false
+}

@@ -1,0 +1,565 @@
+{
+  "stage": "migration-planning-layer-a",
+  "sourceReport": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\jakarta-migration-reports\\impact-facts.json",
+  "summary": {
+    "total_findings": 34,
+    "total_effort_hours": 84.0,
+    "per_batch": {
+      "needs_human_input": {
+        "finding_count": 4,
+        "effort_hours": 24.0
+      },
+      "foundational": {
+        "finding_count": 0,
+        "effort_hours": 0
+      },
+      "mechanical": {
+        "finding_count": 0,
+        "effort_hours": 0
+      },
+      "manual_remediation": {
+        "finding_count": 30,
+        "effort_hours": 60.0
+      }
+    },
+    "effort_formula": "BASE_HOURS[batch] * max(1, n^0.55)  where n=file_count; BASE_HOURS={'needs_human_input': 6.0, 'foundational': 4.0, 'mechanical': 0.0, 'manual_remediation': 2.0}"
+  },
+  "batches": [
+    {
+      "name": "needs_human_input",
+      "index": 0,
+      "findings": [
+        {
+          "id": "jc-0031",
+          "batch": "needs_human_input",
+          "batchIndex": 0,
+          "findingType": "judgment_call",
+          "files": [
+            "src/main/java/com/acme/legacy/entity/Customer.java"
+          ],
+          "signals": [
+            "kind: serializable_class",
+            "detail: implements Serializable (no custom read/write hooks found) - low risk unless a field is javax-typed",
+            "judgment-call kind requires human triage before automated work"
+          ],
+          "effortHours": 6.0,
+          "formulaTrace": "6.0 * max(1, 1^0.55) = 6.0 * 1.0000 = 6.0"
+        },
+        {
+          "id": "jc-0032",
+          "batch": "needs_human_input",
+          "batchIndex": 0,
+          "findingType": "judgment_call",
+          "files": [
+            "src/main/java/com/acme/legacy/entity/Order.java"
+          ],
+          "signals": [
+            "kind: serializable_class",
+            "detail: implements Serializable (no custom read/write hooks found) - low risk unless a field is javax-typed",
+            "judgment-call kind requires human triage before automated work"
+          ],
+          "effortHours": 6.0,
+          "formulaTrace": "6.0 * max(1, 1^0.55) = 6.0 * 1.0000 = 6.0"
+        },
+        {
+          "id": "jc-0033",
+          "batch": "needs_human_input",
+          "batchIndex": 0,
+          "findingType": "judgment_call",
+          "files": [
+            "src/main/java/com/acme/legacy/entity/OrderItem.java"
+          ],
+          "signals": [
+            "kind: serializable_class",
+            "detail: implements Serializable (no custom read/write hooks found) - low risk unless a field is javax-typed",
+            "judgment-call kind requires human triage before automated work"
+          ],
+          "effortHours": 6.0,
+          "formulaTrace": "6.0 * max(1, 1^0.55) = 6.0 * 1.0000 = 6.0"
+        },
+        {
+          "id": "jc-0034",
+          "batch": "needs_human_input",
+          "batchIndex": 0,
+          "findingType": "judgment_call",
+          "files": [
+            "src/main/java/com/acme/legacy/jsf/OrderBackingBean.java"
+          ],
+          "signals": [
+            "kind: serializable_class",
+            "detail: implements Serializable (no custom read/write hooks found) - low risk unless a field is javax-typed",
+            "judgment-call kind requires human triage before automated work"
+          ],
+          "effortHours": 6.0,
+          "formulaTrace": "6.0 * max(1, 1^0.55) = 6.0 * 1.0000 = 6.0"
+        }
+      ]
+    },
+    {
+      "name": "foundational",
+      "index": 1,
+      "findings": []
+    },
+    {
+      "name": "mechanical",
+      "index": 2,
+      "findings": []
+    },
+    {
+      "name": "manual_remediation",
+      "index": 3,
+      "findings": [
+        {
+          "id": "sc-0001",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0002",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0003",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0004",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0005",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0006",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0007",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0008",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0009",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0010",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0011",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0012",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0013",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0014",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0015",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0016",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0017",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0018",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0019",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0020",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0021",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0022",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0023",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "sc-0024",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "source_file",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer (class not found in WAR)",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "dc-0025",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "descriptor",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "dc-0026",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "descriptor",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "dc-0027",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "descriptor",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "dc-0028",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "descriptor",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "dc-0029",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "descriptor",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        },
+        {
+          "id": "dc-0030",
+          "batch": "manual_remediation",
+          "batchIndex": 3,
+          "findingType": "descriptor",
+          "files": [
+            ""
+          ],
+          "signals": [
+            "not mechanically covered by Eclipse Transformer",
+            "requires hand edit \u2014 not handled by rewrite tooling"
+          ],
+          "effortHours": 2.0,
+          "formulaTrace": "2.0 * max(1, 1^0.55) = 2.0 * 1.0000 = 2.0"
+        }
+      ]
+    }
+  ]
+}
