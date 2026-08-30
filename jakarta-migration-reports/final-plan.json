@@ -1,0 +1,299 @@
+{
+  "stage": "final-plan-layer-b",
+  "repoPath": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management",
+  "generatedAt": "2025-08-30T13:00:00Z",
+  "sourceReports": {
+    "discoveryReport": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\jakarta-migration-reports\\discovery-report.json",
+    "impactFacts":     "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\jakarta-migration-reports\\impact-facts.json",
+    "migrationPlan":   "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\jakarta-migration-reports\\migration-plan.json"
+  },
+  "projectMeta": {
+    "projectName":          "javaee8-order-management",
+    "artifactId":           "javaee8-order-management",
+    "currentRuntime":       "Open Liberty (javaee-8.0 feature)",
+    "currentJavaEEVersion": "Java EE 8"
+  },
+  "targetPlatform": {
+    "jakartaEEVersion": "Jakarta EE 10",
+    "jdk":              "JDK 17",
+    "runtime":          "Open Liberty 23.0.0.6+"
+  },
+  "riskRegister": [
+    {
+      "id": "RISK-001",
+      "title": "serializable_class — Customer.java",
+      "severity": "low",
+      "classification": "pre-existing-latent-defect",
+      "resolution": "Field audit complete — no javax EE-typed fields found; all fields are Java SE or primitive types. No action required.",
+      "reference": "REFERENCE.md §2 (Java SE packages)"
+    },
+    {
+      "id": "RISK-002",
+      "title": "serializable_class — Order.java",
+      "severity": "low",
+      "classification": "pre-existing-latent-defect",
+      "resolution": "Field audit complete — no javax EE-typed fields found; Customer/OrderItem/List/LocalDateTime are all Java SE types. No action required.",
+      "reference": "REFERENCE.md §2 (Java SE packages)"
+    },
+    {
+      "id": "RISK-003",
+      "title": "serializable_class — OrderItem.java",
+      "severity": "low",
+      "classification": "pre-existing-latent-defect",
+      "resolution": "Field audit complete — no javax EE-typed fields found; Order/String/int/double are Java SE types. No action required.",
+      "reference": "REFERENCE.md §2 (Java SE packages)"
+    },
+    {
+      "id": "RISK-004",
+      "title": "serializable_class — OrderBackingBean.java",
+      "severity": "low",
+      "classification": "pre-existing-latent-defect",
+      "resolution": "Field audit complete — no javax EE-typed fields found; OrderProcessorBean is an application class (not javax.*) and Order is an app entity. No action required.",
+      "reference": "REFERENCE.md §2 (Java SE packages)"
+    },
+    {
+      "id": "RISK-BEH-01",
+      "title": "Servlet cookie SameSite / RFC 6265bis behavioral change",
+      "severity": "medium",
+      "classification": "behavioral-change",
+      "resolution": "Verify cookie handling in Servlet/JSF layers after migration. Jakarta Servlet 6.0 defaults may differ from 4.0 for SameSite attribute. Test login/session flows.",
+      "reference": "REFERENCE.md §8 item 1"
+    },
+    {
+      "id": "RISK-BEH-02",
+      "title": "CDI 4.0 constructor injection rule tightened",
+      "severity": "medium",
+      "classification": "behavioral-change",
+      "resolution": "Review all CDI beans for constructor injection. CDI 4.0 requires @Inject on constructors with parameters. Verify OrderProcessorBean, AppIdentityStore, AsyncReportGenerator.",
+      "reference": "REFERENCE.md §8 item 2"
+    },
+    {
+      "id": "RISK-BEH-04",
+      "title": "JAX-WS removed from JDK 11 — explicit dependency required",
+      "severity": "high",
+      "classification": "dependency-gap",
+      "resolution": "Replace javax.xml.ws:jaxws-api:2.3.1 + javax.jws:javax.jws-api:1.1 with com.sun.xml.ws:jaxws-ri:4.0.2 (or jakarta.xml.ws:jakarta.xml.ws-api:4.0.0 + implementation). REFERENCE.md §3 High-risk specs.",
+      "reference": "REFERENCE.md §3 High-risk specs"
+    },
+    {
+      "id": "RISK-BEH-05",
+      "title": "JAXB removed from JDK 11 — explicit dependency required",
+      "severity": "high",
+      "classification": "dependency-gap",
+      "resolution": "Replace javax.xml.bind:jaxb-api:2.3.1 with jakarta.xml.bind:jakarta.xml.bind-api:4.0.0; replace org.glassfish.jaxb:jaxb-runtime:2.3.1 with org.glassfish.jaxb:jaxb-runtime:4.0.3.",
+      "reference": "REFERENCE.md §3 High-risk specs"
+    },
+    {
+      "id": "RISK-VENDOR-01",
+      "title": "glassfish-web.xml — vendor descriptor for GlassFish",
+      "severity": "medium",
+      "classification": "vendor-runtime-lock-in",
+      "resolution": "Remove or replace glassfish-web.xml. The target runtime is Open Liberty; GlassFish-specific deployment descriptor has no equivalent. If only declaring namespace/context-root, use Liberty's server.xml <webApplication> element instead.",
+      "reference": "REFERENCE.md §4 (vendor descriptors)"
+    }
+  ],
+  "workItems": [
+    {
+      "id": "WI-001",
+      "batch": "foundational",
+      "title": "Bump Maven dependencies to Jakarta EE 10 coordinates",
+      "status": "pending",
+      "assignee": "unassigned",
+      "effortHours": 2.0,
+      "referenceSection": "REFERENCE.md §6",
+      "description": "Replace all legacy javax.* Maven coordinates with Jakarta EE 10 equivalents. Changes required:\n1. REMOVE: javax:javaee-api:8.0.1 → ADD: jakarta.platform:jakarta.jakartaee-api:10.0.0 (provided)\n2. REMOVE: javax.xml.bind:jaxb-api:2.3.1 → ADD: jakarta.xml.bind:jakarta.xml.bind-api:4.0.0 (provided)\n3. REMOVE: org.glassfish.jaxb:jaxb-runtime:2.3.1 → ADD: org.glassfish.jaxb:jaxb-runtime:4.0.3 (runtime)\n4. REMOVE: javax.xml.ws:jaxws-api:2.3.1 → ADD: jakarta.xml.ws:jakarta.xml.ws-api:4.0.0 (provided)\n5. REMOVE: javax.jws:javax.jws-api:1.1 → (bundled in jaxws-api:4.0.0; no separate dep needed)\n6. UPDATE: org.hibernate.validator:hibernate-validator:6.0.21.Final → 8.0.1.Final (Jakarta BV 3.0 compatible)\nAlso update Maven compiler source/target from 1.8 to 17.",
+      "files": ["pom.xml"],
+      "dependsOn": []
+    },
+    {
+      "id": "WI-002",
+      "batch": "foundational",
+      "title": "Update Liberty server.xml feature names to Jakarta EE 10",
+      "status": "pending",
+      "assignee": "unassigned",
+      "effortHours": 0.5,
+      "referenceSection": "REFERENCE.md §5",
+      "description": "Replace legacy Liberty feature 'javaee-8.0' with 'jakartaee-10.0' in server.xml <featureManager> block.",
+      "files": ["src/main/liberty/config/server.xml"],
+      "dependsOn": []
+    },
+    {
+      "id": "WI-003",
+      "batch": "mechanical",
+      "title": "Apply Eclipse Transformer output — rename javax.* imports to jakarta.*",
+      "status": "pending",
+      "assignee": "unassigned",
+      "effortHours": 0.0,
+      "referenceSection": "REFERENCE.md §3",
+      "description": "Eclipse Transformer rewrote 211 class files (243 total artifacts changed) in the impact analysis phase. Apply the transformed source to all 24 javax-using source files. The run_migration MCP tool handles this automatically via the transform_source + apply_transformer_output steps.",
+      "files": [
+        "src/main/java/com/acme/legacy/cdi/AuditInterceptor.java",
+        "src/main/java/com/acme/legacy/cdi/AuditLogged.java",
+        "src/main/java/com/acme/legacy/cdi/OrderEventObserver.java",
+        "src/main/java/com/acme/legacy/concurrency/AsyncReportGenerator.java",
+        "src/main/java/com/acme/legacy/ejb/InventoryManagerBean.java",
+        "src/main/java/com/acme/legacy/ejb/OrderNotifierBean.java",
+        "src/main/java/com/acme/legacy/ejb/OrderProcessorBean.java",
+        "src/main/java/com/acme/legacy/entity/Customer.java",
+        "src/main/java/com/acme/legacy/entity/Order.java",
+        "src/main/java/com/acme/legacy/entity/OrderItem.java",
+        "src/main/java/com/acme/legacy/jaxrs/ApiApplication.java",
+        "src/main/java/com/acme/legacy/jaxrs/OrderResource.java",
+        "src/main/java/com/acme/legacy/jaxws/CustomerLookupService.java",
+        "src/main/java/com/acme/legacy/jms/OrderQueueSender.java",
+        "src/main/java/com/acme/legacy/jsf/OrderBackingBean.java",
+        "src/main/java/com/acme/legacy/json/OrderJsonMapper.java",
+        "src/main/java/com/acme/legacy/security/AppIdentityStore.java",
+        "src/main/java/com/acme/legacy/servlet/AppContextListener.java",
+        "src/main/java/com/acme/legacy/servlet/OrderExportServlet.java",
+        "src/main/java/com/acme/legacy/servlet/RequestLoggingFilter.java",
+        "src/main/java/com/acme/legacy/validation/SkuValidator.java",
+        "src/main/java/com/acme/legacy/validation/ValidSku.java",
+        "src/main/java/com/acme/legacy/websocket/OrderStatusEndpoint.java",
+        "src/main/java/com/acme/legacy/xml/CustomerXmlMapper.java"
+      ],
+      "dependsOn": ["WI-001"]
+    },
+    {
+      "id": "WI-004",
+      "batch": "manual_remediation",
+      "title": "Fix javax.* config string literals in OrderNotifierBean.java",
+      "status": "pending",
+      "assignee": "unassigned",
+      "effortHours": 0.25,
+      "referenceSection": "REFERENCE.md §3",
+      "description": "Replace propertyValue string literal 'javax.jms.Queue' with 'jakarta.jms.Queue' in @ActivationConfigProperty on line 13.",
+      "files": ["src/main/java/com/acme/legacy/ejb/OrderNotifierBean.java"],
+      "dependsOn": ["WI-003"]
+    },
+    {
+      "id": "WI-005",
+      "batch": "manual_remediation",
+      "title": "Update javax.faces.* string literals in web.xml",
+      "status": "pending",
+      "assignee": "unassigned",
+      "effortHours": 0.25,
+      "referenceSection": "REFERENCE.md §3",
+      "description": "Replace 'javax.faces.PROJECT_STAGE' with 'jakarta.faces.PROJECT_STAGE' and 'javax.faces.webapp.FacesServlet' with 'jakarta.faces.webapp.FacesServlet' in web.xml.",
+      "files": ["src/main/webapp/WEB-INF/web.xml"],
+      "dependsOn": ["WI-003"]
+    },
+    {
+      "id": "WI-006",
+      "batch": "manual_remediation",
+      "title": "Update persistence.xml — namespace, schema, and property key",
+      "status": "pending",
+      "assignee": "unassigned",
+      "effortHours": 0.25,
+      "referenceSection": "REFERENCE.md §4",
+      "description": "Update persistence.xml: version 2.2 → 3.1, namespace http://xmlns.jcp.org/xml/ns/persistence → https://jakarta.ee/xml/ns/persistence, schema location → https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd. Also rename property key 'javax.persistence.schema-generation.database.action' → 'jakarta.persistence.schema-generation.database.action'.",
+      "files": ["src/main/resources/META-INF/persistence.xml"],
+      "dependsOn": ["WI-001"]
+    },
+    {
+      "id": "WI-007",
+      "batch": "manual_remediation",
+      "title": "Update beans.xml — version and namespace",
+      "status": "pending",
+      "assignee": "unassigned",
+      "effortHours": 0.25,
+      "referenceSection": "REFERENCE.md §4",
+      "description": "Update beans.xml: version 2.0 → 4.0, namespace http://xmlns.jcp.org/xml/ns/javaee → https://jakarta.ee/xml/ns/jakartaee, schema → https://jakarta.ee/xml/ns/jakartaee/beans_4_0.xsd.",
+      "files": ["src/main/webapp/WEB-INF/beans.xml"],
+      "dependsOn": ["WI-001"]
+    },
+    {
+      "id": "WI-008",
+      "batch": "manual_remediation",
+      "title": "Update faces-config.xml — version and namespace",
+      "status": "pending",
+      "assignee": "unassigned",
+      "effortHours": 0.25,
+      "referenceSection": "REFERENCE.md §4",
+      "description": "Update faces-config.xml: version 2.3 → 4.0, namespace http://xmlns.jcp.org/xml/ns/javaee → https://jakarta.ee/xml/ns/jakartaee, schema → https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_4_0.xsd.",
+      "files": ["src/main/webapp/WEB-INF/faces-config.xml"],
+      "dependsOn": ["WI-001"]
+    },
+    {
+      "id": "WI-009",
+      "batch": "manual_remediation",
+      "title": "Update web.xml — version and namespace",
+      "status": "pending",
+      "assignee": "unassigned",
+      "effortHours": 0.25,
+      "referenceSection": "REFERENCE.md §4",
+      "description": "Update web.xml: version 4.0 → 6.0, namespace http://xmlns.jcp.org/xml/ns/javaee → https://jakarta.ee/xml/ns/jakartaee, schema → https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd.",
+      "files": ["src/main/webapp/WEB-INF/web.xml"],
+      "dependsOn": ["WI-001"]
+    },
+    {
+      "id": "WI-010",
+      "batch": "manual_remediation",
+      "title": "Update orders.xhtml — Facelets namespace URIs",
+      "status": "pending",
+      "assignee": "unassigned",
+      "effortHours": 0.25,
+      "referenceSection": "REFERENCE.md §4",
+      "description": "Replace legacy Facelets namespace URIs in orders.xhtml: xmlns:h='http://xmlns.jcp.org/jsf/html' → 'jakarta.faces.html', xmlns:f='http://xmlns.jcp.org/jsf/core' → 'jakarta.faces.core'.",
+      "files": ["src/main/webapp/orders.xhtml"],
+      "dependsOn": ["WI-001"]
+    },
+    {
+      "id": "WI-011",
+      "batch": "manual_remediation",
+      "title": "Remove or replace glassfish-web.xml vendor descriptor",
+      "status": "pending",
+      "assignee": "unassigned",
+      "effortHours": 0.5,
+      "referenceSection": "REFERENCE.md §4 (vendor descriptors)",
+      "description": "GlassFish-specific deployment descriptor is not applicable to Open Liberty. Remove the file. If context-root or resource-ref configuration is needed, add it to Liberty's server.xml <webApplication> block.",
+      "files": ["src/main/webapp/WEB-INF/glassfish-web.xml"],
+      "dependsOn": ["WI-002"]
+    }
+  ],
+  "sprintRoadmap": [
+    {
+      "sprint": 1,
+      "goal": "All serializable_class candidates triaged — all Outcome A (no javax EE-typed fields). No blocked items. Proceed directly to foundational changes.",
+      "workItemIds": [],
+      "totalEffortHours": 0.0,
+      "note": "needs_human_input batch is empty — all 4 serializable_class risks resolved to Outcome A."
+    },
+    {
+      "sprint": 2,
+      "goal": "Land foundational Maven and Liberty config changes to establish Jakarta EE 10 compile baseline.",
+      "workItemIds": ["WI-001", "WI-002"],
+      "totalEffortHours": 2.5
+    },
+    {
+      "sprint": 3,
+      "goal": "Apply Eclipse Transformer source rewrite and fix all string-literal and descriptor gaps.",
+      "workItemIds": ["WI-003", "WI-004", "WI-005", "WI-006", "WI-007", "WI-008", "WI-009", "WI-010", "WI-011"],
+      "totalEffortHours": 2.0
+    },
+    {
+      "sprint": 4,
+      "goal": "Full mvn package with Jakarta EE 10 APIs; fix any residual compile errors; verify behavioral risk items.",
+      "workItemIds": [],
+      "totalEffortHours": 2.0,
+      "note": "Verification sprint: run mvn package, address any compile errors per REFERENCE.md §8 item 6. Review RISK-BEH-01 (cookie SameSite), RISK-BEH-02 (CDI constructor injection)."
+    }
+  ],
+  "effortSummary": {
+    "totalHours": 8.5,
+    "byBatch": {
+      "needs_human_input": 0.0,
+      "foundational": 2.5,
+      "mechanical": 0.0,
+      "manual_remediation": 2.0
+    },
+    "note": "Layer A plan_migration estimated 84h based on raw file/finding counts. Layer B triage reduced this to 8.5h: all serializable_class risks resolved to Outcome A (no blocked items), and Eclipse Transformer handles all 24 javax-using source files mechanically (0 net effort)."
+  },
+  "signOff": {
+    "status": "draft",
+    "preparedBy": "Bob (ee-volution-plan skill)",
+    "reviewedBy": "",
+    "approvedBy": "",
+    "notes": "Awaiting technical lead review. All 4 serializable_class candidates triaged to Outcome A — no needs_human_input items block Sprint 2. Sprint 1 is empty; migration starts at Sprint 2 (foundational)."
+  }
+}
