@@ -1,0 +1,73 @@
+{
+  "stage": "impact-analysis-layer-a",
+  "inputWar": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\target\\javaee8-order-management.war",
+  "transformerRun": {
+    "tool": "org.eclipse.transformer.cli.JakartaTransformerCLI",
+    "version": "1.0.0",
+    "license": "EPL-2.0 OR Apache-2.0",
+    "returnCode": 0,
+    "actionSummary": {
+      "All Selected": {"total": 1601, "unchanged": 1358, "changed": 243},
+      "Class Action": {"total": 1293, "unchanged": 1082, "changed": 211},
+      "Jar Action": {"total": 7, "unchanged": 1, "changed": 6},
+      "Rename Action": {"total": 149, "unchanged": 148, "changed": 1},
+      "Service Config Action": {"total": 1, "unchanged": 0, "changed": 1},
+      "Text Action": {"total": 4, "unchanged": 0, "changed": 4},
+      "XML Action": {"total": 9, "unchanged": 5, "changed": 4},
+      "Properties Action": {"total": 129, "unchanged": 118, "changed": 11},
+      "Manifest Action": {"total": 8, "unchanged": 3, "changed": 5},
+      "JSP Action": {"total": 1, "unchanged": 1, "changed": 0}
+    },
+    "logFile": "C:\\IBM_BOB\\EE-volution_JavaEE_JakartaEE\\javaee8-order-management\\target\\jakarta-impact\\javaee8-order-management.transform.log"
+  },
+  "sourceCoverage": {
+    "totalFilesWithJavax": 24,
+    "mechanicallyCovered": 24,
+    "notMechanicallyCovered": 0,
+    "entries": [
+      {"file": "src/main/java/com/acme/legacy/cdi/AuditInterceptor.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/cdi/AuditLogged.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/cdi/OrderEventObserver.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/concurrency/AsyncReportGenerator.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/ejb/InventoryManagerBean.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/ejb/OrderNotifierBean.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/ejb/OrderProcessorBean.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/entity/Customer.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/entity/Order.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/entity/OrderItem.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/jaxrs/ApiApplication.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/jaxrs/OrderResource.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/jaxws/CustomerLookupService.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/jms/OrderQueueSender.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/jsf/OrderBackingBean.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/json/OrderJsonMapper.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/security/AppIdentityStore.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/servlet/AppContextListener.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/servlet/OrderExportServlet.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/servlet/RequestLoggingFilter.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/validation/SkuValidator.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/validation/ValidSku.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/websocket/OrderStatusEndpoint.java", "mechanicallyCovered": true},
+      {"file": "src/main/java/com/acme/legacy/xml/CustomerXmlMapper.java", "mechanicallyCovered": true}
+    ]
+  },
+  "descriptorCoverage": [
+    {"file": "src/main/liberty/config/server.xml", "mechanicallyCovered": false, "note": "Liberty feature names require manual update"},
+    {"file": "src/main/resources/META-INF/persistence.xml", "mechanicallyCovered": true},
+    {"file": "src/main/webapp/WEB-INF/beans.xml", "mechanicallyCovered": true},
+    {"file": "src/main/webapp/WEB-INF/faces-config.xml", "mechanicallyCovered": true},
+    {"file": "src/main/webapp/WEB-INF/web.xml", "mechanicallyCovered": false, "note": "javax.faces.* string literals need gap-fill"},
+    {"file": "src/main/webapp/orders.xhtml", "mechanicallyCovered": false, "note": "JSF namespace URIs require gap-fill"}
+  ],
+  "judgmentCallCandidates": [
+    {"file": "src/main/java/com/acme/legacy/entity/Customer.java", "kind": "serializable_class", "detail": "implements Serializable (no custom read/write hooks found) - low risk unless a field is javax-typed"},
+    {"file": "src/main/java/com/acme/legacy/entity/Order.java", "kind": "serializable_class", "detail": "implements Serializable (no custom read/write hooks found) - low risk unless a field is javax-typed"},
+    {"file": "src/main/java/com/acme/legacy/entity/OrderItem.java", "kind": "serializable_class", "detail": "implements Serializable (no custom read/write hooks found) - low risk unless a field is javax-typed"},
+    {"file": "src/main/java/com/acme/legacy/jsf/OrderBackingBean.java", "kind": "serializable_class", "detail": "implements Serializable (no custom read/write hooks found) - low risk unless a field is javax-typed"}
+  ],
+  "scopeNotes": [
+    "Eclipse Transformer's bundled rules cover the one-time javax->jakarta package rename plus EE8->EE9 descriptor version bumps. EE9->EE10 API/behavioral changes (e.g. the servlet cookie RFC6265 behavior change, removed deprecated methods) are NOT in scope for this tool and will not show up as gaps here - they need a separate, dedicated check.",
+    "Third-party jars bundled under WEB-INF/lib were excluded from sourceCoverage; their javax surface is a dependency-version-bump concern already tracked in Discovery's dependency inventory, not duplicated here.",
+    "judgmentCallCandidates are pattern matches, not confirmed risks - e.g. a Serializable class is flagged even when none of its fields are actually javax-typed. Confirming real risk is Layer B's job."
+  ]
+}
